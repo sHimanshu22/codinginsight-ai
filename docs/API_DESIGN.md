@@ -8,22 +8,24 @@ Base URL:
 
 The API follows REST principles and returns JSON responses.
 
-Standard Response Format:
+Standard Success Response:
 
-Success:
-
+```json
 {
-"success": true,
-"message": "Operation successful",
-"data": {}
+  "success": true,
+  "message": "Operation successful",
+  "data": {}
 }
+```
 
-Error:
+Standard Error Response:
 
+```json
 {
-"success": false,
-"message": "Error message"
+  "success": false,
+  "message": "Error message"
 }
+```
 
 ---
 
@@ -41,21 +43,26 @@ POST /auth/register
 
 Request:
 
+```json
 {
-"name": "Himanshu",
-"email": "[user@example.com](mailto:user@example.com)",
-"password": "password123"
+  "name": "Himanshu",
+  "email": "user@example.com",
+  "password": "password123"
 }
+```
 
 Response:
 
+```json
 {
-"success": true,
-"message": "User registered successfully",
-"data": {
-"token": "jwt_token"
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "token": "jwt_token",
+    "user": {}
+  }
 }
-}
+```
 
 ---
 
@@ -65,20 +72,25 @@ POST /auth/login
 
 Request:
 
+```json
 {
-"email": "[user@example.com](mailto:user@example.com)",
-"password": "password123"
+  "email": "user@example.com",
+  "password": "password123"
 }
+```
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Login successful",
-"data": {
-"token": "jwt_token"
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "token": "jwt_token",
+    "user": {}
+  }
 }
-}
+```
 
 ---
 
@@ -86,18 +98,31 @@ Response:
 
 GET /auth/me
 
-Headers:
+Response:
 
-Authorization: Bearer JWT_TOKEN
+```json
+{
+  "success": true,
+  "data": {
+    "user": {}
+  }
+}
+```
+
+---
+
+## Logout User
+
+POST /auth/logout
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"user": {}
+  "success": true,
+  "message": "Logout successful"
 }
-}
+```
 
 ---
 
@@ -115,17 +140,21 @@ POST /profiles/connect
 
 Request:
 
+```json
 {
-"platform": "leetcode",
-"username": "coding_user"
+  "platform": "leetcode",
+  "username": "coding_user"
 }
+```
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Profile connected successfully"
+  "success": true,
+  "message": "Profile connected successfully"
 }
+```
 
 ---
 
@@ -135,12 +164,31 @@ GET /profiles
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"profiles": []
+  "success": true,
+  "data": {
+    "profiles": []
+  }
 }
+```
+
+---
+
+## Get Profile Details
+
+GET /profiles/:id
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "profile": {}
+  }
 }
+```
 
 ---
 
@@ -150,14 +198,16 @@ POST /profiles/:id/sync
 
 Purpose:
 
-Fetch latest data from coding platform.
+Fetch latest data from coding platform and update statistics.
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Profile synchronized"
+  "success": true,
+  "message": "Profile synchronized successfully"
 }
+```
 
 ---
 
@@ -167,10 +217,12 @@ DELETE /profiles/:id
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Profile removed"
+  "success": true,
+  "message": "Profile removed successfully"
 }
+```
 
 ---
 
@@ -188,26 +240,22 @@ GET /dashboard
 
 Purpose:
 
-Returns aggregated statistics from all platforms.
+Returns all dashboard data required by the frontend.
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-
-```
-  "totalSolved": 1200,
-
-  "platforms": [],
-
-  "contestRatings": [],
-
-  "recentActivity": []
-```
-
+  "success": true,
+  "data": {
+    "user": {},
+    "profiles": [],
+    "analytics": {},
+    "goals": [],
+    "latestAnalysis": {}
+  }
 }
-}
+```
 
 ---
 
@@ -217,28 +265,98 @@ GET /dashboard/summary
 
 Purpose:
 
-Lightweight dashboard metrics.
+Returns lightweight dashboard statistics.
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-
-```
-  "connectedPlatforms": 4,
-
-  "totalSolved": 1200,
-
-  "highestRating": 1800
-```
-
+  "success": true,
+  "data": {
+    "connectedPlatforms": 2,
+    "totalSolved": 1200,
+    "highestRating": 1800,
+    "consistencyScore": 78
+  }
 }
-}
+```
 
 ---
 
-# 5. Snapshot APIs
+# 5. Analytics APIs
+
+Base Route:
+
+/api/v1/analytics
+
+---
+
+## Get Analytics
+
+GET /analytics
+
+Purpose:
+
+Returns processed analytics generated from coding data.
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "consistencyScore": 80,
+    "activityScore": 75,
+    "contestPerformanceScore": 72,
+    "strongestTopics": [],
+    "weakestTopics": []
+  }
+}
+```
+
+---
+
+## Get Growth Analytics
+
+GET /analytics/growth
+
+Purpose:
+
+Returns historical growth information.
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "growth": []
+  }
+}
+```
+
+---
+
+## Recalculate Analytics
+
+POST /analytics/recalculate
+
+Purpose:
+
+Rebuild analytics using latest snapshots.
+
+Response:
+
+```json
+{
+  "success": true,
+  "message": "Analytics recalculated successfully"
+}
+```
+
+---
+
+# 6. Snapshot APIs
 
 Base Route:
 
@@ -252,35 +370,41 @@ GET /snapshots
 
 Query Parameters:
 
+```text
 ?platform=leetcode
+```
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"snapshots": []
+  "success": true,
+  "data": {
+    "snapshots": []
+  }
 }
-}
+```
 
 ---
 
-## Get Growth Analytics
+## Get Snapshot Details
 
-GET /snapshots/growth
+GET /snapshots/:id
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"growth": []
+  "success": true,
+  "data": {
+    "snapshot": {}
+  }
 }
-}
+```
 
 ---
 
-# 6. Goal APIs
+# 7. Goal APIs
 
 Base Route:
 
@@ -294,18 +418,23 @@ POST /goals
 
 Request:
 
+```json
 {
-"title": "Solve 500 Problems",
-"targetValue": 500,
-"deadline": "2026-12-31"
+  "goalType": "leetcode_problems",
+  "platform": "leetcode",
+  "targetValue": 500,
+  "deadline": "2026-12-31"
 }
+```
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Goal created"
+  "success": true,
+  "message": "Goal created successfully"
 }
+```
 
 ---
 
@@ -315,12 +444,31 @@ GET /goals
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"goals": []
+  "success": true,
+  "data": {
+    "goals": []
+  }
 }
+```
+
+---
+
+## Get Goal Details
+
+GET /goals/:id
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "goal": {}
+  }
 }
+```
 
 ---
 
@@ -330,10 +478,12 @@ PUT /goals/:id
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Goal updated"
+  "success": true,
+  "message": "Goal updated successfully"
 }
+```
 
 ---
 
@@ -343,14 +493,16 @@ DELETE /goals/:id
 
 Response:
 
+```json
 {
-"success": true,
-"message": "Goal deleted"
+  "success": true,
+  "message": "Goal deleted successfully"
 }
+```
 
 ---
 
-# 7. AI Analysis APIs
+# 8. AI Analysis APIs
 
 Base Route:
 
@@ -364,26 +516,21 @@ POST /analysis/generate
 
 Purpose:
 
-Generate AI report using latest profile data.
+Generate AI-powered coding profile analysis.
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-
-```
-  "readinessScore": 78,
-
-  "strengths": [],
-
-  "weaknesses": [],
-
-  "recommendations": []
-```
-
+  "success": true,
+  "data": {
+    "strengths": [],
+    "weaknesses": [],
+    "recommendations": [],
+    "summary": ""
+  }
 }
-}
+```
 
 ---
 
@@ -393,12 +540,14 @@ GET /analysis/latest
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"report": {}
+  "success": true,
+  "data": {
+    "report": {}
+  }
 }
-}
+```
 
 ---
 
@@ -408,24 +557,99 @@ GET /analysis/history
 
 Response:
 
+```json
 {
-"success": true,
-"data": {
-"reports": []
+  "success": true,
+  "data": {
+    "reports": []
+  }
 }
-}
+```
 
 ---
 
-# 8. Authentication Middleware
+# 9. Company Readiness APIs
+
+Base Route:
+
+/api/v1/readiness
+
+---
+
+## Generate Readiness Report
+
+POST /readiness/generate
+
+Request:
+
+```json
+{
+  "targetCompany": "Google"
+}
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "readinessScore": 78,
+    "metrics": {},
+    "strengths": [],
+    "weaknesses": [],
+    "recommendations": []
+  }
+}
+```
+
+---
+
+## Get Latest Readiness Report
+
+GET /readiness/latest
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "report": {}
+  }
+}
+```
+
+---
+
+## Get Readiness History
+
+GET /readiness/history
+
+Response:
+
+```json
+{
+  "success": true,
+  "data": {
+    "reports": []
+  }
+}
+```
+
+---
+
+# 10. Authentication Middleware
 
 Protected Routes:
 
-* Dashboard APIs
 * Profile APIs
+* Dashboard APIs
+* Analytics APIs
+* Snapshot APIs
 * Goal APIs
 * Analysis APIs
-* Snapshot APIs
+* Readiness APIs
 
 Authentication Method:
 
@@ -433,106 +657,107 @@ JWT Bearer Token
 
 Header:
 
+```text
 Authorization: Bearer JWT_TOKEN
+```
 
 ---
 
-# 9. Error Handling
+# 11. Error Handling
 
-Common Errors:
+Common Status Codes:
 
-400 Bad Request
+* 200 OK
+* 201 Created
+* 400 Bad Request
+* 401 Unauthorized
+* 403 Forbidden
+* 404 Not Found
+* 500 Internal Server Error
 
-401 Unauthorized
+Error Response:
 
-403 Forbidden
-
-404 Not Found
-
-500 Internal Server Error
-
-Response Format:
-
+```json
 {
-"success": false,
-"message": "Detailed error message"
+  "success": false,
+  "message": "Detailed error message"
 }
+```
 
 ---
 
-# 10. API Versioning
+# 12. API Versioning
 
 Current Version:
 
-v1
-
-Example:
-
-/api/v1/dashboard
+```text
+/api/v1
+```
 
 Future Versions:
 
-/api/v2/dashboard
+```text
+/api/v2
+```
 
-This allows future upgrades without breaking existing clients.
+Versioning prevents breaking changes for future clients.
 
 ---
 
-# 11. Backend Service Mapping
+# 13. Backend Service Mapping
 
+```text
 Auth APIs
-
 ↓
-
 AuthService
 
 Profile APIs
-
 ↓
-
 ProfileService
 
 Dashboard APIs
-
 ↓
-
 DashboardService
 
-Goal APIs
-
+Analytics APIs
 ↓
+AnalyticsService
 
+Goal APIs
+↓
 GoalService
 
 Analysis APIs
-
 ↓
+AIAnalysisService
 
-AnalysisService
-
-This ensures clear separation of responsibilities and maintainable backend architecture.
+Readiness APIs
+↓
+ReadinessService
+```
 
 ---
 
-# 12. Development Order
+# 14. Development Order
 
-Phase 1:
+Phase 1 (MVP)
 
-1. Auth APIs
+1. Authentication APIs
 2. Profile APIs
 3. Dashboard APIs
 
-Phase 2:
+Phase 2
 
-4. Analysis APIs
-
-Phase 3:
-
+4. Analytics APIs
 5. Snapshot APIs
+
+Phase 3
+
 6. Goal APIs
+7. AI Analysis APIs
 
-Phase 4:
+Phase 4
 
-7. Company Readiness APIs
+8. Company Readiness APIs
 
-This order minimizes complexity and allows incremental development.
+This development sequence minimizes complexity and enables incremental feature delivery.

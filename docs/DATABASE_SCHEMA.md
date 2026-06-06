@@ -4,26 +4,39 @@
 
 Database: MongoDB
 
-The system uses a document-based database to store:
+CodingInsight AI uses MongoDB to store:
 
 * User accounts
-* Connected coding profiles
-* Aggregated statistics
-* Historical snapshots
-* Goals
-* AI analysis reports
+* Connected coding platform profiles
+* Historical coding progress
+* Aggregated analytics
+* User goals
+* AI-generated insights and readiness reports
 
-Collections are designed to support future coding platforms without major schema changes.
+The schema is designed to:
+
+* Support multiple coding platforms
+* Store historical growth data
+* Enable analytics generation
+* Enable AI-powered recommendations
+* Remain extensible for future features
 
 ---
 
 # 2. Collections Overview
 
+Core Collections:
+
 1. users
 2. codingProfiles
 3. profileSnapshots
-4. goals
-5. analysisReports
+4. userAnalytics
+5. goals
+6. analysisReports
+
+Optional Future Collection:
+
+7. syncLogs
 
 ---
 
@@ -55,7 +68,7 @@ updatedAt: Date
 
 Indexes:
 
-email (unique)
+* email (unique)
 
 ---
 
@@ -65,7 +78,7 @@ Purpose:
 
 Stores connected coding platform accounts.
 
-One user can connect multiple platforms.
+One user can connect multiple coding platforms.
 
 Schema:
 
@@ -84,45 +97,49 @@ isConnected: Boolean,
 
 lastSyncedAt: Date,
 
-stats: {
-
-```
-  totalSolved: Number,
-
-  easySolved: Number,
-
-  mediumSolved: Number,
-
-  hardSolved: Number,
-
-  contestRating: Number,
-
-  contestRank: Number,
-
-  contributionPoints: Number
-```
-
-},
+platformStats: Object,
 
 createdAt: Date,
 
 updatedAt: Date
 }
 
-Example platform values:
+Example:
+
+{
+userId: ObjectId,
+
+platform: "leetcode",
+
+username: "john123",
+
+platformStats: {
+
+```
+totalSolved: 350,
+
+easySolved: 150,
+
+mediumSolved: 170,
+
+hardSolved: 30
+```
+
+}
+}
+
+Indexes:
+
+* userId
+* platform
+* (userId + platform) unique
+
+Supported Platforms:
 
 * leetcode
 * codeforces
 * codechef
 * geeksforgeeks
-
-Indexes:
-
-userId
-
-platform
-
-(userId + platform) unique
 
 ---
 
@@ -130,13 +147,14 @@ platform
 
 Purpose:
 
-Stores historical progress data.
+Stores historical profile data.
 
-This enables:
+Used for:
 
-* Rating growth charts
 * Progress tracking
+* Growth charts
 * Historical analytics
+* AI trend analysis
 
 Schema:
 
@@ -149,20 +167,30 @@ platform: String,
 
 snapshotDate: Date,
 
+stats: Object,
+
+createdAt: Date
+}
+
+Example:
+
+{
+userId: ObjectId,
+
+platform: "leetcode",
+
+snapshotDate: Date,
+
 stats: {
 
 ```
-  totalSolved: Number,
+totalSolved: 320,
 
-  easySolved: Number,
+easySolved: 140,
 
-  mediumSolved: Number,
+mediumSolved: 150,
 
-  hardSolved: Number,
-
-  contestRating: Number,
-
-  contestRank: Number
+hardSolved: 30
 ```
 
 }
@@ -170,19 +198,19 @@ stats: {
 
 Indexes:
 
-userId
-
-snapshotDate
-
-platform
+* userId
+* platform
+* snapshotDate
 
 ---
 
-# 6. Goals Collection
+# 6. User Analytics Collection
 
 Purpose:
 
-Stores user-defined coding goals.
+Stores processed analytics generated from coding profiles and snapshots.
+
+Dashboard should primarily read from this collection.
 
 Schema:
 
@@ -191,9 +219,47 @@ _id: ObjectId,
 
 userId: ObjectId,
 
-title: String,
+totalSolved: Number,
 
-description: String,
+consistencyScore: Number,
+
+contestPerformanceScore: Number,
+
+activeDays: Number,
+
+strongestPlatform: String,
+
+weakestPlatform: String,
+
+strongestTopics: [String],
+
+weakestTopics: [String],
+
+lastUpdated: Date
+}
+
+Indexes:
+
+* userId (unique)
+
+---
+
+# 7. Goals Collection
+
+Purpose:
+
+Stores coding goals defined by users.
+
+Schema:
+
+{
+_id: ObjectId,
+
+userId: ObjectId,
+
+goalType: String,
+
+platform: String,
 
 targetValue: Number,
 
@@ -208,7 +274,14 @@ createdAt: Date,
 updatedAt: Date
 }
 
-Status values:
+Goal Types:
+
+* leetcode_problems
+* codeforces_rating
+* contest_participation
+* daily_streak
+
+Status Values:
 
 * pending
 * active
@@ -216,17 +289,16 @@ Status values:
 
 Indexes:
 
-userId
-
-status
+* userId
+* status
 
 ---
 
-# 7. Analysis Reports Collection
+# 8. Analysis Reports Collection
 
 Purpose:
 
-Stores AI-generated reports.
+Stores AI-generated profile analysis and company readiness reports.
 
 Schema:
 
@@ -235,48 +307,133 @@ _id: ObjectId,
 
 userId: ObjectId,
 
+targetCompany: String,
+
 readinessScore: Number,
 
-strengths: [
+metrics: {
 
 ```
-  String
+problemSolving: Number,
+
+consistency: Number,
+
+contestPerformance: Number,
+
+topicCoverage: Number
 ```
 
-],
+},
 
-weaknesses: [
+strengths: [String],
 
-```
-  String
-```
+weaknesses: [String],
 
-],
-
-recommendations: [
-
-```
-  String
-```
-
-],
+recommendations: [String],
 
 summary: String,
 
 generatedAt: Date
 }
 
+Example:
+
+{
+targetCompany: "Google",
+
+readinessScore: 72,
+
+metrics: {
+
+```
+problemSolving: 80,
+
+consistency: 70,
+
+contestPerformance: 65,
+
+topicCoverage: 73
+```
+
+}
+}
+
 Indexes:
 
-userId
-
-generatedAt
+* userId
+* targetCompany
+* generatedAt
 
 ---
 
-# 8. Relationships
+# 9. Sync Logs Collection (Future)
 
-User
+Purpose:
+
+Stores profile synchronization history.
+
+Useful for debugging API integrations.
+
+Schema:
+
+{
+_id: ObjectId,
+
+userId: ObjectId,
+
+platform: String,
+
+status: String,
+
+message: String,
+
+syncedAt: Date
+}
+
+Status Values:
+
+* success
+* failed
+
+Indexes:
+
+* userId
+* platform
+* syncedAt
+
+---
+
+# 10. Relationships
+
+User (1)
+
+├── Coding Profiles (Many)
+
+├── Profile Snapshots (Many)
+
+├── Goals (Many)
+
+├── Analysis Reports (Many)
+
+└── User Analytics (One)
+
+Relationship Summary:
+
+User (1) → (Many) Coding Profiles
+
+User (1) → (Many) Profile Snapshots
+
+User (1) → (Many) Goals
+
+User (1) → (Many) Analysis Reports
+
+User (1) → (One) User Analytics
+
+---
+
+# 11. Data Flow
+
+Coding Platforms
 
 ↓
 
@@ -288,87 +445,46 @@ Profile Snapshots
 
 ↓
 
-Analysis Reports
+User Analytics
 
 ↓
 
-Goals
+AI Analysis Reports
 
-Relationship Type:
-
-User (1) → (Many) Coding Profiles
-
-User (1) → (Many) Snapshots
-
-User (1) → (Many) Goals
-
-User (1) → (Many) Analysis Reports
+The AI system should analyze processed analytics instead of raw platform data.
 
 ---
 
-# 9. Snapshot Strategy
+# 12. Snapshot Strategy
 
-Purpose:
+Frequency:
 
-Track progress over time.
+* Once per day
 
-Recommended Frequency:
-
-Once per day
-
-Snapshot Creation:
+Process:
 
 1. Fetch latest platform data
-2. Store new snapshot
-3. Update current profile stats
-4. Generate dashboard analytics
+2. Update codingProfiles
+3. Create profileSnapshots
+4. Recalculate userAnalytics
+5. Generate AI insights when requested
 
 Benefits:
 
-* Growth charts
+* Growth tracking
 * Historical trends
-* AI progress analysis
+* Better AI recommendations
 
 ---
 
-# 10. Dashboard Aggregation Strategy
+# 13. Database Design Principles
 
-Dashboard should not query external platforms directly.
-
-Instead:
-
-1. Fetch data from MongoDB
-2. Aggregate profile statistics
-3. Return unified response
-
-Benefits:
-
-* Faster dashboard
-* Lower API usage
-* Better scalability
-
----
-
-# 11. Future Extensions
-
-The schema supports:
-
-* Additional coding platforms
-* Resume analysis
-* Interview readiness reports
-* Team comparisons
-* Public profile sharing
-* AI mentoring features
-
-without requiring major database redesign.
-
----
-
-# 12. Database Design Principles
-
-* Avoid data duplication
-* Use references where appropriate
-* Store historical data separately
 * Keep platform integrations generic
-* Optimize for dashboard reads
-* Design for future extensibility
+* Separate raw data from analytics
+* Store historical data independently
+* Optimize dashboard reads
+* Support future coding platforms
+* Minimize schema changes
+* Enable AI-driven analysis
+
+---

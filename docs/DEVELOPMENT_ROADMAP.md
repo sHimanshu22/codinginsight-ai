@@ -1,435 +1,350 @@
 # CodingInsight AI - Development Roadmap
 
-# Project Vision
+## Phase 0 - Foundation
 
-Build a full-stack MERN application that aggregates coding profiles from multiple platforms into a unified dashboard and provides AI-powered insights for coding improvement.
+Duration: 1-2 Days
 
-Primary Goal:
+Goals:
 
-Demonstrate software engineering, system design, API integration, database design, dashboard development, and AI integration skills for placement interviews.
+* Setup React
+* Setup Express
+* Setup MongoDB Atlas
+* Configure Environment Variables
+* Configure Git Repository
+* Create Project Structure
 
----
+Deliverable:
 
-# Development Strategy
-
-Development will follow incremental milestones.
-
-Each milestone must be:
-
-* Functional
-* Tested
-* Committed to GitHub
-* Deployable
-
-No new milestone begins until the previous milestone is completed.
+* React Frontend Running
+* Express Backend Running
+* MongoDB Connected
 
 ---
 
-# Milestone 0: Project Foundation
+## Phase 1 - Authentication Module
 
-Estimated Time: 1-2 Days
-
-Objective:
-
-Set up project structure and development environment.
-
-Tasks:
-
-* Create GitHub repository
-* Initialize frontend project
-* Initialize backend project
-* Configure environment variables
-* Connect MongoDB Atlas
-* Create folder structure
-* Configure Git
-
-Deliverables:
-
-* Running React application
-* Running Express server
-* MongoDB connection established
-
-Suggested Commit Messages:
-
-* Initial project setup
-* Configure backend architecture
-* Configure frontend architecture
-* Setup MongoDB connection
-
----
-
-# Milestone 1: Authentication System
-
-Estimated Time: 3-5 Days
-
-Objective:
-
-Implement secure user authentication.
+Duration: 3-5 Days
 
 Features:
 
-* User registration
-* User login
-* JWT authentication
-* Password hashing
-* Protected routes
-* User profile endpoint
+* Register
+* Login
+* JWT Authentication
+* Protected Routes
+* Current User API
 
-Backend Tasks:
+Deliverable:
 
-* User model
-* Auth controller
-* Auth service
-* JWT middleware
+* Complete Authentication System
 
-Frontend Tasks:
+Resume Value:
 
-* Register page
-* Login page
-* Protected routes
-
-Deliverables:
-
-* Users can register
-* Users can login
-* Authentication persists
-
-Suggested Commit Messages:
-
-* Implement user registration
-* Implement user login
-* Add JWT authentication
-* Add protected routes
+* Authentication
+* Security
+* JWT
+* Backend Architecture
 
 ---
 
-# Milestone 2: Coding Profile Integration
+## Phase 2 - Profile Integration Module
 
-Estimated Time: 5-7 Days
+Duration: 5-7 Days
 
-Objective:
+Supported Platforms:
 
-Allow users to connect coding profiles.
+* LeetCode
+* Codeforces
 
 Features:
 
-* Connect LeetCode profile
-* Connect Codeforces profile
-* Connect CodeChef profile
-* Connect GeeksforGeeks profile
+* Connect Profile
+* Fetch Profile Data
+* Store Profile Data
+* Sync Profile
 
-Backend Tasks:
+Deliverable:
 
-* CodingProfile model
-* Profile APIs
-* Platform service layer
-* Data validation
+* Users can connect coding profiles
 
-Frontend Tasks:
+Resume Value:
 
-* Connect profile page
-* Profile management page
-
-Deliverables:
-
-* Users can connect platforms
-* Platform data stored in database
-
-Suggested Commit Messages:
-
-* Create coding profile schema
-* Add profile connection APIs
-* Implement platform services
-* Add profile management UI
+* API Integration
+* Data Normalization
+* Service Layer Design
 
 ---
 
-# Milestone 3: Unified Dashboard
+## Phase 3 - Analytics Engine
 
-Estimated Time: 5-7 Days
-
-Objective:
-
-Display consolidated coding statistics.
+Duration: 4-6 Days
 
 Features:
 
-* Dashboard overview
-* Statistics cards
-* Platform summaries
-* Rating display
-* Activity information
+* Consistency Score
+* Activity Score
+* Contest Performance Score
+* Platform Statistics
+* User Analytics Collection
 
-Backend Tasks:
+Deliverable:
 
-* Dashboard service
-* Aggregation logic
-* Dashboard APIs
+* Analytics generated from profile data
 
-Frontend Tasks:
+Resume Value:
 
-* Dashboard layout
-* Statistics cards
-* Data visualization
-
-Deliverables:
-
-* Unified dashboard operational
-
-Suggested Commit Messages:
-
-* Implement dashboard aggregation
-* Add dashboard APIs
-* Build dashboard UI
-* Add statistics visualization
+* Data Processing
+* Analytics Engineering
+* Backend Logic
 
 ---
 
-# Milestone 4: Historical Tracking
+## Phase 4 - Unified Dashboard
 
-Estimated Time: 4-6 Days
-
-Objective:
-
-Track coding progress over time.
+Duration: 4-6 Days
 
 Features:
 
-* Snapshot storage
-* Growth tracking
-* Historical analytics
+* Dashboard Overview
+* Statistics Cards
+* Platform Comparison
+* Analytics Visualization
+* Recharts Integration
 
-Backend Tasks:
+Deliverable:
 
-* Snapshot model
-* Snapshot service
-* Scheduled data collection
+* Fully Functional Dashboard
 
-Frontend Tasks:
+Resume Value:
 
-* Growth charts
-* Historical statistics page
-
-Deliverables:
-
-* Historical progress visible
-
-Suggested Commit Messages:
-
-* Add snapshot system
-* Implement growth analytics
-* Build progress charts
+* React
+* Data Visualization
+* Dashboard Design
 
 ---
 
-# Milestone 5: Goal Tracking
+## Phase 5 - AI Analysis Engine
 
-Estimated Time: 3-4 Days
-
-Objective:
-
-Allow users to set and monitor coding goals.
+Duration: 5-7 Days
 
 Features:
 
-* Create goals
-* Track progress
-* Goal completion status
+* Strength Analysis
+* Weakness Analysis
+* Personalized Recommendations
+* Gemini Integration
 
-Backend Tasks:
+Workflow:
 
-* Goal model
-* Goal APIs
+Profile Data
+↓
+Analytics Engine
+↓
+Gemini
+↓
+Insights
 
-Frontend Tasks:
+Deliverable:
 
-* Goal creation form
-* Goal dashboard
+* AI Analysis Reports
 
-Deliverables:
+Resume Value:
 
-* Goal management system
-
-Suggested Commit Messages:
-
-* Create goals module
-* Add goal tracking APIs
-* Build goal management UI
+* AI Integration
+* Prompt Engineering
+* Structured AI Workflows
 
 ---
 
-# Milestone 6: AI Analysis Engine
+## Phase 6 - Historical Tracking
 
-Estimated Time: 5-7 Days
-
-Objective:
-
-Generate AI-powered coding insights.
+Duration: 4-5 Days
 
 Features:
 
-* Strength analysis
-* Weakness analysis
-* Personalized recommendations
+* Profile Snapshots
+* Growth Tracking
+* Historical Analytics
+* Growth Charts
 
-Backend Tasks:
+Deliverable:
 
-* Analysis service
-* Prompt engineering
-* AI integration
+* Historical Performance Tracking
 
-Frontend Tasks:
+Resume Value:
 
-* AI analysis page
-* Report visualization
-
-Deliverables:
-
-* AI-generated reports
-
-Suggested Commit Messages:
-
-* Add AI analysis service
-* Generate coding insights
-* Build AI report interface
+* Time-Series Data
+* Analytics Pipelines
 
 ---
 
-# Milestone 7: Company Readiness Engine
+## Phase 7 - Goal Tracking
 
-Estimated Time: 5-7 Days
-
-Objective:
-
-Evaluate interview readiness.
+Duration: 2-3 Days
 
 Features:
 
-* Readiness score
-* Gap analysis
-* Improvement roadmap
+* Create Goals
+* Track Goals
+* Progress Monitoring
 
-Deliverables:
+Deliverable:
 
-* Readiness report
-* Improvement recommendations
+* Goal Management System
 
-Suggested Commit Messages:
+Resume Value:
 
-* Add readiness scoring
-* Implement gap analysis
-* Build readiness dashboard
+* CRUD Development
 
 ---
 
-# Deployment Phase
+## Phase 8 - Company Readiness Engine
 
-Estimated Time: 1-2 Days
+Duration: 5-7 Days
 
-Tasks:
+Features:
 
-Backend:
+* Readiness Score
+* Gap Analysis
+* AI Explanations
+* Improvement Roadmap
 
-* Environment configuration
-* Production deployment
+Deliverable:
+
+* Readiness Reports
+
+Resume Value:
+
+* Recommendation Systems
+* Scoring Systems
+* AI-Assisted Evaluation
+
+---
+
+## Phase 9 - Production Deployment
+
+Duration: 1-2 Days
 
 Frontend:
 
-* Production build
-* Deployment
+* Deploy to Vercel
+
+Backend:
+
+* Deploy to Render/Railway
 
 Database:
 
-* Production MongoDB configuration
+* MongoDB Atlas
 
-Deliverables:
+Deliverable:
 
-* Live application URL
-* Public GitHub repository
-
-Suggested Commit Messages:
-
-* Configure production environment
-* Deploy backend
-* Deploy frontend
+* Live Production Application
 
 ---
 
-# Git Workflow
+## Git Workflow
 
-Main Branch:
+Branch Strategy:
 
 main
-
-Feature Branch Examples:
 
 feature/auth
 
 feature/profiles
 
-feature/dashboard
+feature/analytics
 
-feature/snapshots
+feature/dashboard
 
 feature/ai-analysis
 
-Workflow:
+feature/snapshots
+
+feature/goals
+
+feature/readiness
+
+Rules:
 
 1. Create feature branch
-2. Implement feature
+2. Build feature
 3. Test feature
-4. Merge into main
+4. Commit
+5. Merge into main
 
 ---
 
-# Resume Milestones
+## Portfolio Checkpoints
 
-After Milestone 3:
+Checkpoint 1
 
-Resume Ready
+After Phase 2
 
 Skills Demonstrated:
 
 * MERN Stack
 * Authentication
-* REST APIs
-* MongoDB
-* API Integration
-* Dashboard Development
-
-After Milestone 6:
-
-Strong Placement Project
-
-Additional Skills:
-
-* AI Integration
-* Data Analytics
-* Prompt Engineering
-* Progress Tracking
-
-After Milestone 7:
-
-Flagship Portfolio Project
-
-Additional Skills:
-
-* Product Thinking
-* Recommendation Systems
-* Analytics Architecture
-* AI-driven Insights
+* External API Integration
 
 ---
 
-# Success Criteria
+Checkpoint 2
 
-Project is considered complete when:
+After Phase 4
 
-* Fully deployed
-* Public GitHub repository available
-* Authentication implemented
-* Multiple coding platforms integrated
-* Unified dashboard functional
-* AI analysis operational
-* Documentation complete
-* Ready for technical interviews
+Skills Demonstrated:
+
+* MERN Stack
+* Dashboard Development
+* Analytics Processing
+
+Portfolio Ready
+
+---
+
+Checkpoint 3
+
+After Phase 5
+
+Skills Demonstrated:
+
+* AI Integration
+* Prompt Engineering
+* Data Analytics
+
+Strong Placement Project
+
+---
+
+Checkpoint 4
+
+After Phase 8
+
+Skills Demonstrated:
+
+* System Design
+* Analytics Engineering
+* Recommendation Systems
+* AI-Powered Insights
+
+Flagship Portfolio Project
+
+---
+
+## Final Success Criteria
+
+Project is complete when:
+
+* Fully Deployed
+* Public GitHub Repository Available
+* Authentication Implemented
+* LeetCode and Codeforces Integrated
+* Analytics Engine Functional
+* Dashboard Functional
+* AI Analysis Operational
+* Company Readiness Engine Operational
+* Documentation Complete
+* Ready for Placement Interviews
+
+```
+```

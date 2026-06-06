@@ -1,59 +1,107 @@
 # CodingInsight AI - Product Specification
 
-## 1. Project Overview
+# 1. Project Overview
 
-### Project Name
+## Project Name
 
 CodingInsight AI
 
-### Project Type
+## Project Type
 
 Full-Stack Web Application
 
-### Purpose
+## Purpose
 
-CodingInsight AI is a centralized platform that aggregates coding profiles from multiple competitive programming and coding practice platforms into a single dashboard.
+CodingInsight AI is an AI-powered Coding Profile Aggregator and Analytics Platform that consolidates coding profile data from multiple competitive programming platforms into a unified dashboard.
 
-The application helps developers, students, and placement aspirants track their coding performance, monitor progress, identify weaknesses, and receive AI-driven recommendations for improvement.
+The platform helps students, placement aspirants, and competitive programmers track their coding journey, monitor progress, identify strengths and weaknesses, and receive personalized recommendations based on their coding performance.
 
-The primary objective of the project is to demonstrate full-stack software engineering skills, API integration, data processing, analytics, dashboard development, and AI integration.
+The primary objective of the project is to demonstrate:
+
+* Full-Stack Development
+* Software Architecture Design
+* REST API Development
+* Database Design
+* Third-Party API Integration
+* Analytics Engineering
+* AI Integration
+* Product Thinking
 
 ---
 
 # 2. Problem Statement
 
-Competitive programmers and placement aspirants often maintain profiles on multiple coding platforms such as:
+Students and competitive programmers often maintain coding profiles on multiple platforms such as:
 
 * LeetCode
 * Codeforces
 * CodeChef
 * GeeksforGeeks
 
-Each platform provides different statistics, rankings, and performance metrics.
+Each platform provides different statistics, ratings, rankings, and performance metrics.
 
-Users must manually visit multiple websites to analyze their overall coding progress.
+As a result:
 
-There is currently no simple unified dashboard that combines these profiles and provides consolidated insights.
+* Progress is fragmented across platforms
+* Users must manually switch between websites
+* It is difficult to measure overall growth
+* Weaknesses are difficult to identify
+* There is no centralized view of coding performance
 
----
-
-# 3. Target Users
-
-### Primary Users
-
-* College students
-* Placement aspirants
-* Competitive programmers
-* Software engineering interview candidates
-
-### Secondary Users
-
-* Recruiters reviewing candidate profiles
-* Coding mentors and trainers
+CodingInsight AI solves this problem by aggregating coding profile data into a single platform and generating meaningful analytics and AI-powered insights.
 
 ---
 
-# 4. Goals
+# 3. Core Philosophy
+
+CodingInsight AI is not an AI chatbot.
+
+The platform focuses on:
+
+* Data Aggregation
+* Analytics Generation
+* Progress Tracking
+* AI-Powered Profile Analysis
+
+The AI system analyzes structured coding performance data and analytics to generate actionable insights and recommendations.
+
+Users do not interact with a generic conversational chatbot.
+
+The platform follows the workflow:
+
+Raw Coding Data
+
+↓
+
+Analytics Generation
+
+↓
+
+AI Insight Generation
+
+↓
+
+Actionable Recommendations
+
+---
+
+# 4. Target Users
+
+## Primary Users
+
+* College Students
+* Placement Aspirants
+* Competitive Programmers
+* Software Engineering Interview Candidates
+
+## Secondary Users
+
+* Coding Mentors
+* Coding Trainers
+
+---
+
+# 5. Goals
 
 The application should allow users to:
 
@@ -63,177 +111,263 @@ The application should allow users to:
 * Track progress over time
 * Analyze strengths and weaknesses
 * Receive AI-generated recommendations
-* Monitor readiness for placement opportunities
+* Monitor interview readiness
+* Set and track coding goals
 
 ---
 
-# 5. Minimum Viable Product (MVP)
-
-The MVP includes the following features:
+# 6. Minimum Viable Product (MVP)
 
 ## Authentication
 
-* User registration
-* User login
-* Secure authentication
-* Logout functionality
+Features:
 
-## Profile Integration
+* User Registration
+* User Login
+* JWT Authentication
+* Logout Functionality
 
-Users can connect:
+---
 
-* LeetCode profile
-* Codeforces profile
-* CodeChef profile
-* GeeksforGeeks profile
+## Coding Profile Integration
+
+Supported Platforms:
+
+* LeetCode
+* Codeforces
+
+Users can:
+
+* Connect profiles
+* Sync coding statistics
+* View platform-specific information
+
+---
 
 ## Unified Dashboard
 
 Dashboard should display:
 
-* Total solved problems
-* Platform-wise statistics
-* Contest ratings
-* User profile information
-* Coding activity summary
+* User Profile Information
+* Connected Platforms
+* Total Solved Problems
+* Platform-wise Statistics
+* Contest Ratings
+* Activity Summary
+* Growth Indicators
 
 ---
 
-# 6. Phase 2 Features
+## Analytics Engine
+
+The system generates analytics from coding profile data.
+
+Examples:
+
+* Consistency Score
+* Activity Score
+* Contest Performance Score
+* Rating Growth
+* Platform Comparison Metrics
+
+These analytics become the foundation for future AI analysis.
+
+---
+
+# 7. Phase 2 Features
 
 ## AI Profile Analysis
 
-The system analyzes coding data and provides:
+The AI system analyzes user analytics and coding performance data.
 
 ### Strength Analysis
 
 Examples:
 
-* Strong in Dynamic Programming
-* Strong contest performance
-* Consistent coding activity
+* Strong Problem Solving Skills
+* Strong Contest Performance
+* Consistent Coding Activity
+* Strong Topic Coverage
 
 ### Weakness Analysis
 
 Examples:
 
-* Weak in Graph Algorithms
-* Low contest participation
-* Inconsistent coding habits
+* Weak Graph Algorithms
+* Weak Dynamic Programming
+* Low Contest Participation
+* Inconsistent Practice
 
 ### Personalized Recommendations
 
 Examples:
 
-* Suggested problem categories
-* Suggested difficulty levels
-* Suggested weekly goals
+* Suggested Problem Categories
+* Recommended Difficulty Levels
+* Suggested Weekly Goals
+* Personalized Improvement Plans
 
 ---
 
-# 7. Phase 3 Features
+# 8. Phase 3 Features
 
 ## Progress Tracking
 
-The system stores periodic snapshots of user statistics.
+The platform stores periodic profile snapshots.
 
-Features include:
+Features:
 
-* Historical records
-* Growth tracking
-* Rating progression
-* Problem-solving trends
+* Historical Statistics
+* Growth Tracking
+* Rating Progression
+* Solved Problem Trends
+* Long-Term Performance Analysis
+
+---
 
 ## Goal Tracking
 
 Users can:
 
-* Set coding goals
-* Monitor completion percentage
-* Track progress against targets
+* Create Coding Goals
+* Monitor Progress
+* Track Completion Percentage
+* View Goal Deadlines
+
+Example Goals:
+
+* Solve 300 LeetCode Problems
+* Reach Codeforces Rating 1400
+* Participate in 10 Contests
 
 ---
 
-# 8. Phase 4 Features
+# 9. Phase 4 Features
 
 ## Company Readiness Engine
 
-The system evaluates user readiness for technical interviews.
+The system evaluates a user's readiness for technical interviews.
 
 Examples:
 
-* Product-based companies
-* Service-based companies
-* Startup hiring standards
-
-### Gap Analysis
-
-Examples:
-
-* Missing DSA topics
-* Insufficient contest experience
-* Lack of advanced problem-solving practice
-
-### AI Explanations
-
-The system explains:
-
-* Why readiness score was assigned
-* Areas requiring improvement
-* Suggested roadmap
+* MAANG-Style Readiness
+* Product Company Readiness
+* Service Company Readiness
+* Startup Readiness
 
 ---
 
-# 9. Non-Functional Requirements
+## Readiness Scoring
+
+The readiness score is generated using predefined analytics metrics.
+
+Examples:
+
+* Problem Solving Score
+* Consistency Score
+* Contest Performance Score
+* Topic Coverage Score
+
+The AI system explains the score and provides recommendations for improvement.
+
+---
+
+## Gap Analysis
+
+Examples:
+
+* Missing DSA Topics
+* Low Contest Experience
+* Weak Problem Difficulty Distribution
+* Inconsistent Coding Activity
+
+---
+
+## AI Explanations
+
+The platform explains:
+
+* Why the readiness score was assigned
+* Which metrics influenced the score
+* Areas requiring improvement
+* Recommended learning roadmap
+
+---
+
+# 10. Non-Functional Requirements
 
 ## Performance
 
-Dashboard should load quickly.
+* Dashboard should load quickly
+* Database queries should be optimized
+* Analytics should be precomputed where possible
+
+---
 
 ## Scalability
 
-Architecture should support adding new coding platforms in future.
+The architecture should support:
+
+* Additional coding platforms
+* Additional analytics modules
+* Additional AI features
+
+without major redesign.
+
+---
 
 ## Security
 
-* Secure authentication
-* Protected user data
-* Safe API communication
+* Secure Authentication
+* JWT-Based Authorization
+* Password Hashing
+* Protected User Data
+* Secure API Communication
+
+---
 
 ## Maintainability
 
-Code should follow modular architecture and clean coding principles.
+The codebase should:
+
+* Follow modular architecture
+* Use service-oriented design
+* Maintain separation of concerns
+* Follow clean coding practices
 
 ---
 
-# 10. Success Criteria
+# 11. Success Criteria
 
 The project will be considered successful if users can:
 
-* Register and login
-* Connect multiple coding profiles
-* View consolidated statistics
-* Track progress over time
-* Receive meaningful AI insights
+* Register and Login
+* Connect Multiple Coding Profiles
+* View Consolidated Statistics
+* Track Progress Using Historical Snapshots
+* Monitor Coding Goals
+* Receive Analytics-Based Recommendations
+* Generate Company Readiness Reports
 
 ---
 
-# 11. Future Enhancements
+# 12. Future Enhancements
 
 Possible future improvements:
 
-* Resume analysis
-* Interview preparation planner
-* Coding streak tracking
-* Weekly email reports
-* Team comparison dashboard
-* Public profile sharing
-* Advanced AI mentor
-* Mobile application
+* CodeChef Integration
+* GeeksforGeeks Integration
+* Coding Streak Tracking
+* Weekly Email Reports
+* Public Profile Sharing
+* Team Comparison Dashboard
+* Advanced AI Mentor
+* Resume Analysis
+* Mobile Application
 
 ---
 
-# 12. Project Outcome
+# 13. Project Outcome
 
 CodingInsight AI demonstrates:
 
@@ -242,7 +376,10 @@ CodingInsight AI demonstrates:
 * Authentication Systems
 * Database Design
 * Third-Party API Integration
-* Data Analytics
+* Analytics Engineering
 * AI Integration
-* Product Thinking
-* Software Architecture Skills
+* Software Architecture Design
+* System Design Thinking
+* Product Development Skills
+
+The project showcases the ability to build a real-world application that combines data aggregation, analytics, and AI-powered insights into a unified user experience.

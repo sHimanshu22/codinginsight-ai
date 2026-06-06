@@ -2,76 +2,91 @@
 
 # 1. Architecture Overview
 
-CodingInsight AI follows a layered architecture consisting of:
+CodingInsight AI follows a layered architecture designed for maintainability, scalability, and separation of concerns.
+
+The system consists of:
 
 1. Presentation Layer (Frontend)
 2. API Layer (Backend)
 3. Business Logic Layer
-4. Data Access Layer
-5. External Integration Layer
+4. External Integration Layer
+5. Data Access Layer
 6. Database Layer
 
-This separation improves maintainability, scalability, and code organization.
+The architecture separates data collection, analytics generation, and AI-powered insight generation into independent modules.
 
 ---
 
-# 2. High Level System Diagram
+# 2. High-Level Architecture
 
-```
-                +-------------------+
-                |      User         |
-                +---------+---------+
-                          |
-                          v
+```text
+                    +------------------+
+                    |      User        |
+                    +--------+---------+
+                             |
+                             v
 
-                +-------------------+
-                | React Frontend    |
-                +---------+---------+
-                          |
-                          v
+                    +------------------+
+                    | React Frontend   |
+                    +--------+---------+
+                             |
+                             v
 
-                +-------------------+
-                | Express API       |
-                +---------+---------+
-                          |
-      +-------------------+-------------------+
-      |                   |                   |
-      v                   v                   v
-```
+                    +------------------+
+                    | Express API      |
+                    +--------+---------+
+                             |
+                             v
 
-+----------------+  +----------------+  +----------------+
-| Auth Service   |  | Profile Service|  | AI Service     |
-+----------------+  +----------------+  +----------------+
+                    +------------------+
+                    | Controllers      |
+                    +--------+---------+
+                             |
+                             v
 
-```
-      |                   |                   |
-      +-------------------+-------------------+
-                          |
-                          v
+     ---------------------------------------------------------
+     |            |              |            |              |
+     v            v              v            v              v
 
-                +-------------------+
-                | MongoDB Database  |
-                +-------------------+
++----------+ +-----------+ +-----------+ +-----------+ +-----------+
+| Auth     | | Profile   | | Analytics | | Dashboard | | AI        |
+| Service  | | Service   | | Service   | | Service   | | Service   |
++----------+ +-----------+ +-----------+ +-----------+ +-----------+
 
-                          ^
-                          |
-                          |
+     ---------------------------------------------------------
+                             |
+                             v
 
-    +--------------------------------------------+
-    | External Coding Platforms                  |
-    |                                            |
-    | - LeetCode                                |
-    | - Codeforces                              |
-    | - CodeChef                                |
-    | - GeeksforGeeks                           |
-    +--------------------------------------------+
+                    +------------------+
+                    | MongoDB Atlas    |
+                    +------------------+
+
+                             ^
+
+                             |
+
+          -----------------------------------------
+          |                                       |
+          v                                       v
+
++-------------------+                +-------------------+
+| LeetCode Service  |                | Codeforces Service|
++-------------------+                +-------------------+
+
+                             |
+
+                             v
+
+                    +------------------+
+                    | Gemini API       |
+                    +------------------+
 ```
 
 ---
 
-# 3. Frontend Architecture
+# 3. Technology Stack
 
-Technology Stack:
+Frontend:
 
 * React
 * React Router
@@ -79,48 +94,7 @@ Technology Stack:
 * Tailwind CSS
 * Recharts
 
-Frontend Responsibilities:
-
-* Authentication UI
-* Dashboard UI
-* Charts and Analytics
-* Profile Management
-* Goal Tracking
-* AI Analysis Display
-
----
-
-# 4. Frontend Folder Structure
-
-frontend/
-
-src/
-
-├── components/
-
-├── pages/
-
-├── services/
-
-├── hooks/
-
-├── context/
-
-├── layouts/
-
-├── utils/
-
-├── routes/
-
-├── assets/
-
-└── App.jsx
-
----
-
-# 5. Backend Architecture
-
-Technology Stack:
+Backend:
 
 * Node.js
 * Express.js
@@ -128,109 +102,153 @@ Technology Stack:
 * Mongoose
 * JWT Authentication
 
-Backend Responsibilities:
+AI:
 
-* User Authentication
-* Data Validation
+* Gemini API
+
+Deployment:
+
+* Vercel (Frontend)
+* Render or Railway (Backend)
+* MongoDB Atlas
+
+---
+
+# 4. Frontend Architecture
+
+Responsibilities:
+
+* Authentication UI
+* Dashboard UI
+* Profile Connection UI
+* Analytics Visualization
+* Goal Tracking
+* AI Insight Display
+
+Frontend Folder Structure:
+
+```text
+frontend/
+└── src/
+    ├── components/
+    ├── pages/
+    ├── services/
+    ├── hooks/
+    ├── context/
+    ├── layouts/
+    ├── routes/
+    ├── utils/
+    ├── assets/
+    └── App.jsx
+```
+
+---
+
+# 5. Backend Architecture
+
+Responsibilities:
+
+* Authentication
 * Business Logic
-* External API Communication
-* AI Processing
+* Data Aggregation
 * Analytics Generation
+* AI Integration
+* Database Operations
 
----
+Backend Folder Structure:
 
-# 6. Backend Folder Structure
-
+```text
 backend/
+└── src/
+    ├── config/
+    ├── controllers/
+    ├── routes/
+    ├── middleware/
+    ├── models/
+    ├── validators/
+    ├── utils/
 
-src/
+    ├── services/
+    │   ├── auth/
+    │   ├── profiles/
+    │   ├── analytics/
+    │   ├── dashboard/
+    │   └── ai/
 
-├── config/
+    ├── jobs/
 
-├── controllers/
-
-├── services/
-
-├── routes/
-
-├── middleware/
-
-├── models/
-
-├── validators/
-
-├── utils/
-
-├── jobs/
-
-└── app.js
+    └── app.js
+```
 
 ---
 
-# 7. Layer Responsibilities
+# 6. Service Layer Design
 
-## Routes Layer
+## Auth Service
 
 Responsibilities:
 
-* Receive HTTP requests
-* Forward requests to controllers
-
-Example:
-
-GET /dashboard
-
-POST /auth/login
-
-POST /profiles/connect
+* Register user
+* Login user
+* Generate JWT tokens
+* Password hashing
 
 ---
 
-## Controller Layer
+## Profile Service
 
 Responsibilities:
 
-* Request handling
-* Input validation
-* Response formatting
-
-Controllers should contain minimal business logic.
+* Connect coding platforms
+* Fetch profile data
+* Normalize profile data
+* Update coding profiles
+* Create profile snapshots
 
 ---
 
-## Service Layer
+## Analytics Service
 
 Responsibilities:
 
-* Core business logic
-* Data processing
-* Aggregation logic
-* Analytics generation
+* Calculate consistency score
+* Calculate growth metrics
+* Calculate activity score
+* Calculate contest performance
+* Identify strengths and weaknesses
+* Generate user analytics
 
-Examples:
-
-AuthService
-
-ProfileService
-
-DashboardService
-
-AnalysisService
+This service does NOT call Gemini.
 
 ---
 
-## Model Layer
+## Dashboard Service
 
 Responsibilities:
 
-* Database schema definitions
-* Data relationships
-
-Implemented using Mongoose.
+* Aggregate dashboard data
+* Fetch user analytics
+* Fetch goals
+* Fetch connected profiles
+* Return unified dashboard response
 
 ---
 
-# 8. External Integration Layer
+## AI Analysis Service
+
+Responsibilities:
+
+* Build Gemini prompts
+* Send analytics data to Gemini
+* Parse AI responses
+* Generate readiness reports
+* Store analysis reports
+
+This service consumes analytics generated by Analytics Service.
+
+---
+
+# 7. External Integration Layer
 
 Purpose:
 
@@ -240,75 +258,96 @@ Services:
 
 * LeetCode Service
 * Codeforces Service
+
+Future:
+
 * CodeChef Service
 * GeeksforGeeks Service
 
 Responsibilities:
 
-* Fetch profile data
+* Fetch platform data
 * Normalize responses
 * Handle API failures
 * Handle rate limits
+* Validate responses
 
 ---
 
-# 9. Data Flow
+# 8. Profile Sync Workflow
 
-Profile Connection Flow:
-
-User
-
-↓
-
-Frontend
-
-↓
-
-Backend API
-
-↓
-
+```text
+User Connects Platform
+          ↓
 Profile Service
-
-↓
-
+          ↓
 Platform Service
+          ↓
+Fetch Profile Data
+          ↓
+Normalize Data
+          ↓
+Update codingProfiles
+          ↓
+Create profileSnapshot
+          ↓
+Update userAnalytics
+```
 
-↓
-
-External Platform
-
-↓
-
-MongoDB
-
-↓
-
-Frontend Dashboard
+This workflow is executed whenever profile data is refreshed.
 
 ---
 
-# 10. AI Analysis Architecture
+# 9. Analytics Pipeline
 
-Input:
+```text
+codingProfiles
+        ↓
+profileSnapshots
+        ↓
+Analytics Service
+        ↓
 
-* Solved problems
-* Contest ratings
-* Topic distribution
-* Historical progress
+Calculate:
 
-Processing:
+- Consistency Score
+- Activity Score
+- Contest Performance
+- Rating Growth
+- Platform Comparison
+- Strength Analysis
+- Weakness Analysis
 
-* Generate insights
-* Identify strengths
-* Identify weaknesses
-* Create recommendations
+        ↓
 
-Output:
+userAnalytics
+```
 
-* Readiness score
-* Recommendations
-* Improvement roadmap
+Purpose:
+
+Convert raw coding data into meaningful metrics.
+
+---
+
+# 10. AI Analysis Pipeline
+
+```text
+User Requests Analysis
+          ↓
+Fetch userAnalytics
+          ↓
+Build Structured Prompt
+          ↓
+Gemini API
+          ↓
+Generate Insights
+          ↓
+Store analysisReports
+          ↓
+Return Results
+```
+
+The AI system analyzes processed analytics rather than raw profile data.
 
 ---
 
@@ -318,16 +357,19 @@ Dashboard Data Sources:
 
 * User Information
 * Connected Profiles
-* Aggregated Statistics
-* Historical Snapshots
+* User Analytics
+* Goals
 * AI Reports
 
 Displayed Using:
 
-* Cards
-* Tables
+* Statistics Cards
 * Charts
 * Progress Indicators
+* Goal Tracking Widgets
+* AI Insight Panels
+
+Dashboard should primarily read from userAnalytics instead of recalculating metrics on every request.
 
 ---
 
@@ -343,52 +385,79 @@ Password Security:
 
 API Protection:
 
-* Authentication middleware
+* Authentication Middleware
 
 Input Security:
 
-* Validation middleware
+* Validation Middleware
+
+Secrets Management:
 
 Environment Variables:
 
-* Database URI
+* MongoDB URI
 * JWT Secret
-* AI Keys
-* Platform Credentials
+* Gemini API Key
 
 ---
 
 # 13. Scalability Considerations
 
-The architecture should support:
+The architecture supports:
 
 * Additional coding platforms
-* More AI modules
-* More analytics features
-* Mobile application integration
+* Additional analytics modules
+* More AI-powered reports
+* Mobile applications
+* Background synchronization jobs
 
-without major changes to existing code.
+without major redesign.
 
 ---
 
 # 14. Deployment Architecture
 
-Frontend
+```text
+React Frontend
+       ↓
+     Vercel
 
-↓
-
-Vercel
-
-↓
-
-Backend
-
-↓
-
-Render
-
-↓
+Node.js Backend
+       ↓
+ Render/Railway
 
 MongoDB Atlas
+```
 
-This architecture provides a production-ready deployment pipeline suitable for portfolio projects and technical interviews.
+This deployment model is simple, production-ready, and suitable for portfolio projects.
+
+---
+
+# 15. Architecture Principles
+
+* Separation of concerns
+* Service-oriented business logic
+* Analytics before AI
+* Minimal controller logic
+* Reusable services
+* Database-driven dashboards
+* Extensible platform integrations
+* Maintainable folder structure
+
+---
+
+# 16. Core Philosophy
+
+CodingInsight AI is not an AI chatbot.
+
+The system follows:
+
+Raw Coding Data
+↓
+Analytics Generation
+↓
+AI Insight Generation
+↓
+Actionable Recommendations
+
+The AI layer exists to analyze coding performance data and generate meaningful insights, not to answer arbitrary user questions.
